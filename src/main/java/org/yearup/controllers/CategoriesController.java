@@ -23,18 +23,16 @@ public class CategoriesController
         this.productDao = productDao;
     }
 
-    // add the appropriate annotation for a get action
-    @GetMapping
-    public List<Category> getAll(@RequestParam(name = "name", required = false)String name)
+    @GetMapping("")
+    public List<Category> getAll()
     {
-        return categoryDao.getAllCategories(name);
+        return categoryDao.getAllCategories();
     }
 
-    // add the appropriate annotation for a get action
+    @RequestMapping("/{id}")
     public Category getById(@PathVariable int id)
     {
-        // get the category by id
-        return null;
+        return categoryDao.getById(id);
     }
 
     // the url to return all products in category 1 would look like this

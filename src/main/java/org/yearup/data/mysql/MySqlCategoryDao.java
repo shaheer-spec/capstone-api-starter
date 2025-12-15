@@ -23,22 +23,16 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public List<Category> getAllCategories(String name)
+    public List<Category> getAllCategories()
     {
         List<Category> categories = new ArrayList<>();
 
         String CategoryQuery = """
                 SELECT * FROM categories
-                WHERE (name = ? OR ? = '')
                 """;
-
-        name = name == null ? "" : name;
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CategoryQuery)){
-
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, name);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()){
@@ -55,10 +49,28 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public Category getById(int categoryId)
-    {
-        // get category by id
-        return null;
+    public Category getById(int categoryId) {
+        Category category = null;
+        String CategoryQuery = """
+                Select * From categories WHERE category_id = ?
+                """;
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CategoryQuery)){
+
+            preparedStatement.setInt(1, categoryId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                int categoryIDFromDb = resultSet.getInt("category_id");
+                String nameFromDb = resultSet.getString("name");
+                String descriptionFromDb = resultSet.getString("description");
+                category = new Category(categoryIDFromDb, nameFromDb, descriptionFromDb);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
     }
 
     @Override
