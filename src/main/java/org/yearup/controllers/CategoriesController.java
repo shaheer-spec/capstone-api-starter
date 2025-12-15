@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
 import org.yearup.data.mysql.MySqlCategoryDao;
@@ -34,6 +35,7 @@ public class CategoriesController
     @RequestMapping("/{id}")
     public Category getById(@PathVariable int id)
     {
+        if (categoryDao.getById(id) == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return categoryDao.getById(id);
     }
 
