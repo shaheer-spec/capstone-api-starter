@@ -7,7 +7,7 @@ import java.util.List;
 public interface ShoppingCartDao
 {
     ShoppingCart getByUserId(int user_id);
-    ShoppingCart createShoppingCart(ShoppingCart shoppingCart);
+    ShoppingCart addToCard(int product_id, int user_id);
     void updateShoppingCart(int user_id, ShoppingCart shoppingCart);
-    void deleteShoppingCart(int user_id);
+    void deleteProduct(int user_id);
 }
