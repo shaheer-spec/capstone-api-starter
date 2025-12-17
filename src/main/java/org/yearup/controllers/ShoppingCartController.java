@@ -9,6 +9,7 @@ import org.yearup.data.ProductDao;
 import org.yearup.data.ShoppingCartDao;
 import org.yearup.data.UserDao;
 import org.yearup.models.ShoppingCart;
+import org.yearup.models.ShoppingCartItem;
 import org.yearup.models.User;
 
 import java.security.Principal;
@@ -46,10 +47,7 @@ public class ShoppingCartController
         }
     }
 
-    // add a POST method to add a product to the cart - the url should be
-    // https://localhost:8080/cart/products/15 (15 is the productId to be added
-
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("products/{productId}")
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingCart addToCart(@PathVariable int productId, Principal principal)
@@ -67,10 +65,22 @@ public class ShoppingCartController
         }
     }
 
-    // add a PUT method to update an existing product in the cart - the url should be
-    // https://localhost:8080/cart/products/15 (15 is the productId to be updated)
-    // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated
-
+    @PutMapping("products/{productId}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public void updateCart(@PathVariable int productId, @RequestBody ShoppingCartItem shoppingCartItem, Principal principal)
+    {
+        try
+        {
+            String userName = principal.getName();
+            User user = userDao.getByUserName(userName);
+            int userId = user.getId();
+            shoppingCartDao.updateShoppingCart(userId, productId, shoppingCartItem.getQuantity());
+        }
+        catch(Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+        }
+    }
 
     // add a DELETE method to clear all products from the current users cart
     // https://localhost:8080/cart
