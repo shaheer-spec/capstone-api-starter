@@ -45,7 +45,7 @@ public class ProfileController {
 
     @PutMapping
     @PreAuthorize("hasRole('ROLE_USER')")
-    public void updateProfile (Principal principal, @RequestBody Profile profile){
+    public Profile updateProfile (Principal principal, @RequestBody Profile profile){
         try {
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
@@ -55,5 +55,6 @@ public class ProfileController {
         }catch(Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
+        return profile;
     }
 }

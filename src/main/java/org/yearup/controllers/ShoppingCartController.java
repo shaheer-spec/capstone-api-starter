@@ -67,7 +67,7 @@ public class ShoppingCartController
 
     @PutMapping("products/{productId}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public void updateCart(@PathVariable int productId, @RequestBody ShoppingCartItem shoppingCartItem, Principal principal)
+    public ShoppingCart updateCart(@PathVariable int productId, @RequestBody ShoppingCartItem shoppingCartItem, Principal principal)
     {
         try
         {
@@ -75,6 +75,7 @@ public class ShoppingCartController
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
             shoppingCartDao.updateShoppingCart(userId, productId, shoppingCartItem.getQuantity());
+            return shoppingCartDao.getByUserId(userId);
         }
         catch(Exception e)
         {

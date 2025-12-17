@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
 {
-    @Autowired
+
     public MySqlCategoryDao(DataSource dataSource)
     {
         super(dataSource);
