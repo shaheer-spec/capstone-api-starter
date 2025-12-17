@@ -15,6 +15,8 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao
         super(dataSource);
     }
 
+
+
     @Override
     public Profile create(Profile profile)
     {
@@ -42,6 +44,48 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Profile getProfile(int userId) {
+        Profile profile = new Profile();
+
+        String profileQuery = """
+                Select *
+                From profiles
+                Where user_id = ?
+                """;
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(profileQuery)){
+
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                if (resultSet.next()){
+                    profile = new Profile(
+                            resultSet.getInt("user_id"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name"),
+                            resultSet.getString("phone"),
+                            resultSet.getString("email"),
+                            resultSet.getString("address"),
+                            resultSet.getString("city"),
+                            resultSet.getString("state"),
+                            resultSet.getString("zip")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return profile;
+    }
+
+    @Override
+    public void updateProfile(int userId,Profile profile) {
+
     }
 
 }
