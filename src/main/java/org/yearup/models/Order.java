@@ -24,6 +24,9 @@ public class Order {
         this.shippingAmount = shippingAmount;
     }
 
+    public Order() {
+    }
+
     public LocalDateTime getDate() {
         return date;
     }

@@ -1,15 +1,25 @@
 package org.yearup.models;
 
+import java.math.BigDecimal;
+
 public class OrderLineItem {
     private int orderLineIdItem;
     private int orderId;
     private int productId;
-    private double salesPrice;
+    private BigDecimal salesPrice;
     private int quantity;
-    private double discount;
+    private BigDecimal discount;
 
-    public OrderLineItem(int orderLineIdItem, int orderId, int productId, double salesPrice, int quantity, double discount) {
+    public OrderLineItem(int orderLineIdItem, int orderId, int productId, BigDecimal salesPrice, int quantity, BigDecimal discount) {
         this.orderLineIdItem = orderLineIdItem;
+        this.orderId = orderId;
+        this.productId = productId;
+        this.salesPrice = salesPrice;
+        this.quantity = quantity;
+        this.discount = discount;
+    }
+
+    public OrderLineItem(int orderId, int productId, BigDecimal salesPrice, int quantity, BigDecimal discount) {
         this.orderId = orderId;
         this.productId = productId;
         this.salesPrice = salesPrice;
@@ -41,11 +51,11 @@ public class OrderLineItem {
         this.productId = productId;
     }
 
-    public double getSalesPrice() {
+    public BigDecimal getSalesPrice() {
         return salesPrice;
     }
 
-    public void setSalesPrice(double salesPrice) {
+    public void setSalesPrice(BigDecimal salesPrice) {
         this.salesPrice = salesPrice;
     }
 
@@ -57,11 +67,11 @@ public class OrderLineItem {
         this.quantity = quantity;
     }
 
-    public double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 }
