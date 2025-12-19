@@ -29,7 +29,7 @@ public class CheckoutService {
         ShoppingCart shoppingCartDao1 = shoppingCartDao.getByUserId(userId);
 
         Order order = new Order();
-        order.setUser_id(userId);
+        order.setUserId(userId);
         order.setAddress(profile.getAddress());
         order.setCity(profile.getCity());
         order.setState(profile.getState());
@@ -40,7 +40,7 @@ public class CheckoutService {
 
         for (ShoppingCartItem shoppingCartItem : shoppingCartDao1.getItems().values()){
             OrderLineItem orderLineItem = new OrderLineItem(
-                    newOrder.getOrder_id(),
+                    newOrder.getOrderId(),
                     shoppingCartItem.getProductId(),
                     shoppingCartItem.getProduct().getPrice(),
                     shoppingCartItem.getQuantity(),

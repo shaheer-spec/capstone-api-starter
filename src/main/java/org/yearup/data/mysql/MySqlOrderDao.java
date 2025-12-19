@@ -35,7 +35,7 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys()){
                 if (resultSet.next()){
                     int resultId = resultSet.getInt(1);
-                    order.setOrder_id(resultId);
+                    order.setOrderId(resultId);
                 }else {
                     throw new SQLException("Creating Order failed, no ID obtained.");
                 }

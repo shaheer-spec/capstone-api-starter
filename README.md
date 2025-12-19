@@ -39,8 +39,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Demo
 
-- ![Slice-IT GIF.gif](Slice-IT%20GIF.gif)
-
+![Video Game Store Demo.gif](Video%20Game%20Store%20Demo.gif)
 ## Class Diagram
 ![img.png](img.png)
 

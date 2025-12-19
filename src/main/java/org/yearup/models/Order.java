@@ -1,11 +1,10 @@
 package org.yearup.models;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Order {
-    private int order_id;
-    private int user_id;
+    private int orderId;
+    private int userId;
     private LocalDateTime date;
     private String address;
     private String city;
@@ -13,9 +12,9 @@ public class Order {
     private String zip;
     private double shippingAmount;
 
-    public Order(int order_id, int user_id, LocalDateTime date, String address, String city, String state, String zip, double shippingAmount) {
-        this.order_id = order_id;
-        this.user_id = user_id;
+    public Order(int orderId, int userId, LocalDateTime date, String address, String city, String state, String zip, double shippingAmount) {
+        this.orderId = orderId;
+        this.userId = userId;
         this.date = date;
         this.address = address;
         this.city = city;
@@ -35,22 +34,21 @@ public class Order {
         this.date = date;
     }
 
-    public int getOrder_id() {
-        return order_id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
-
 
     public String getAddress() {
         return address;

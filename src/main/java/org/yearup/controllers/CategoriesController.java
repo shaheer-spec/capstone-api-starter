@@ -40,7 +40,6 @@ public class CategoriesController
         return categoryDao.getById(id);
     }
 
-    // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
     public List<Product> getProductsById(@PathVariable int categoryId)
     {

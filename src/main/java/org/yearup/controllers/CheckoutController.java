@@ -6,7 +6,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.yearup.models.Order;
-import org.yearup.models.User;
 import org.yearup.service.CheckoutService;
 
 import java.security.Principal;
